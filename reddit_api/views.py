@@ -15,16 +15,17 @@ def reddit_home(request):
     )
 
     posts = []
-    for post in reddit.subreddit("destiny").hot(limit=10):
+    for post in reddit.subreddit("mrgirlreturns").new(limit=50):
         posts.append({
             'title': post.title,
             'url': post.url,
             'score': post.score,
             'author': post.author.name,
+            'ups': post.ups,
+            'permalink': post.permalink,
         })
    
-    
-    context = {'data': posts}
+    context = {'data': posts[2::]}
     return render(request, 'reddit/index.html', context)
-    return JsonResponse({'posts': posts})
+    #return JsonResponse({'posts': posts})
 
